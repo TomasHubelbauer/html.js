@@ -1,4 +1,4 @@
-import { link, div } from './html.js';
+import { link, div } from './index.js';
 
 /**
  * Provides a base class for all custom HTML elements (web components) which
