@@ -1,3 +1,5 @@
+export { default as Component } from './Component.js';
+
 /** @typedef {{[attribute: string]: string | number | boolean}} Attributes */
 /** @typedef {Node[]} Children */
 
