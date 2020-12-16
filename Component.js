@@ -72,6 +72,9 @@ export default class Component extends HTMLElement {
         throw new Error(`Component class name ${constructor.name} does not match file name ${fileName}!`);
       }
 
+      // Import the global reset stylesheet which handles component rendering visualization animation
+      this._shadowRoot.append(link({ rel: 'stylesheet', href: '/reset.css' }));
+
       // Import the component's styles by appending a `link` element pointing to a CSS file by the name of the component
       this._shadowRoot.append(
         link({
@@ -93,7 +96,12 @@ export default class Component extends HTMLElement {
   }
 
   async handleLinkLoad() {
-    await this.mount();
+    try {
+      await this.mount();
+    }
+    catch (error) {
+      throw new Error(`${this.constructor.name} failed to mount. ${error}`);
+    }
   }
 
   handleLinkError() {
@@ -109,15 +117,34 @@ export default class Component extends HTMLElement {
       throw new Error(`'${this.constructor.name}.render' must be a function.`);
     }
 
+    this._div.classList.toggle('rendering', true);
     this._div.innerHTML = '';
-    for await (const node of this.render()) {
-      if (node === undefined) {
-        this._div.innerHTML = '';
+
+    switch (this.render.constructor.name) {
+      case 'Function':
+      case 'AsyncFunction': {
+        this._div.append(await this.render());
+        break;
       }
-      else {
-        this._div.append(node);
+      case 'GeneratorFunction':
+      case 'AsyncGeneratorFunction': {
+        for await (const node of this.render()) {
+          if (node === undefined) {
+            this._div.innerHTML = '';
+          }
+          else {
+            this._div.append(node);
+          }
+        }
+
+        break;
+      }
+      default: {
+        throw new Error(`${this.constructor.name} render function is neither generator nor async: ${this.render.constructor.name}.`);
       }
     }
+
+    this._div.classList.toggle('rendering', false);
   }
 
   raise(name, detail = null) {

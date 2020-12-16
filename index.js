@@ -81,6 +81,29 @@ export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attribu
         }
       }
     }
+    else if (typeof attributes === 'function') {
+      switch (attributes.constructor.name) {
+        case 'GeneratorFunction':
+        case 'AsyncGeneratorFunction': {
+          // TODO: Create a placeholder element (fragment doesn't work) and backfill to preserve call order
+          void async function () {
+            for await (const item of attributes()) {
+              if (item === undefined) {
+                element.innerHTML = '';
+              }
+              else {
+                element.append(item);
+              }
+            }
+          }()
+
+          break;
+        }
+        default: {
+          throw new Error(`Unexpected content function type ${attributes.constructor.name}.`);
+        }
+      }
+    }
     else {
       throw new Error(`The attributes must be an object not ${typeof attributes}.`);
     }
@@ -205,6 +228,10 @@ export function legend(/** @type {Attributes} */ attributes, /** @type {Children
   return html('legend', attributes, ...children);
 }
 
+export function li(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+  return html('li', attributes, ...children);
+}
+
 export function link(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
   return html('link', attributes, ...children);
 }
@@ -271,6 +298,10 @@ export function thead(/** @type {Attributes} */ attributes, /** @type {Children}
 
 export function tr(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
   return html('tr', attributes, ...children);
+}
+
+export function ul(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+  return html('ul', attributes, ...children);
 }
 
 export function video(/** @type {Attributes} */ attributes) {
