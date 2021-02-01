@@ -20,6 +20,7 @@ export default class Component extends HTMLElement {
       throw new Error('Constructor not defined! Pass the derived class name, e.g.: `super(MyComponent)` instead of `super()`!');
     }
 
+    // TODO: Consider distinguishing components with the same name in different folders if possible
     // Derive the component custom HTML element tag name from its constructor class name
     const name = 'paper' + constructor.name.replace(/[A-Z]/g, match => '-' + match[0].toLowerCase());
 
@@ -108,6 +109,44 @@ export default class Component extends HTMLElement {
     throw new Error(`The stylesheet for ${this.constructor.name} failed to load!`);
   }
 
+  /**
+   * Drain a generator such that even a value returned by `return` is captured.
+   * 
+   * @example
+   * 
+   * async function *test() {
+   *   yield 1;
+   *   yield 2;
+   *   return 3;
+   * }
+   * 
+   * // This does not work, prints 1, 2:
+   * for await (const number of test()) {
+   *   console.log(number);
+   * }
+   * 
+   * // This works, prints 1, 2, 3:
+   * for await (const number of drain(test())) {
+   *   console.log(number);
+   * }
+   */
+  async *drain(generator) {
+    let item;
+    do {
+      item = await generator.next();
+
+      // Yield a `yield`-produced value always
+      if (!item.done) {
+        yield item.value;
+      }
+
+      // Yield a `return`-produced value only if there is no, not for `return;`
+      else if (item.value !== undefined) {
+        yield item.value;
+      }
+    } while (!item.done);
+  }
+
   async mount() {
     if (!this.render) {
       return;
@@ -128,7 +167,7 @@ export default class Component extends HTMLElement {
       }
       case 'GeneratorFunction':
       case 'AsyncGeneratorFunction': {
-        for await (const node of this.render()) {
+        for await (const node of this.drain(this.render())) {
           if (node === undefined) {
             this._div.innerHTML = '';
           }
