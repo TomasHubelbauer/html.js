@@ -8,6 +8,8 @@ import { link, div } from './index.js';
  * 
  * Extend by passing the derived class symbol into the `super` call, so:
  * 
+ * @example
+ * 
  * class MyComponent extends Component {
  *   constructor() {
  *     super(MyComponent);
