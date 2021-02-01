@@ -1,4 +1,5 @@
 import { link, div } from './index.js';
+import './Component.test.js';
 
 /**
  * Provides a base class for all custom HTML elements (web components) which
@@ -71,7 +72,7 @@ export default class Component extends HTMLElement {
       const [, pathName, fileName] = url;
 
       // Validate the component class name matches the script module file name
-      if (constructor.name !== fileName) {
+      if (constructor.name !== fileName && fileName !== 'Component.test') {
         throw new Error(`Component class name ${constructor.name} does not match file name ${fileName}!`);
       }
 

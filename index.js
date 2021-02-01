@@ -3,6 +3,19 @@ export { default as Component } from './Component.js';
 /** @typedef {{[attribute: string]: string | number | boolean}} Attributes */
 /** @typedef {Node[]} Children */
 
+// TODO: Add tests for stuff like this:
+// yield div(0)
+// yield div('')
+// yield div(undefined)
+// yield div(test()) // function test() { return 0 }
+// yield div(test()) // function test() { return '' }
+// yield div(test()) // function test() { return undefined }
+// yield div(test()) // function test() { return null }
+// yield div(test()) // function test() { return false }
+// yield div(test()) // function *test() { yield 'test' }
+// yield div(test()) // function *test() { yield 'test'; return 'test' }
+// yield div(test()) // async function *test() { yield 'test' }
+// yield div(test()) // async function *test() { yield 'test'; return 'test' }
 export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
   const element = typeof tag === 'string' ? document.createElement(tag) : tag;
 
@@ -16,17 +29,17 @@ export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attribu
         if (value === undefined) {
           continue;
         }
-  
+
         switch (key) {
           case 'style': {
             if (typeof value !== 'object') {
               throw new Error('The style attribute must be an object.');
             }
-  
+
             for (const key in value) {
               element.style[key] = value[key];
             }
-  
+
             break;
           }
           case 'class': {
@@ -39,18 +52,18 @@ export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attribu
                 for (const key in value) {
                   element.classList.toggle(key, value[key]);
                 }
-  
+
                 break;
               }
             }
-  
+
             break;
           }
           case 'data': {
             if (typeof value !== 'object') {
               throw new Error('The data(set) attribute must be an object.');
             }
-  
+
             for (const key in value) {
               try {
                 element.dataset[key] = value[key];
@@ -59,7 +72,7 @@ export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attribu
                 throw new Error(`Failed to set data attribute '${key}': '${value[key]}'.`);
               }
             }
-  
+
             break;
           }
           case 'innerHTML': {
