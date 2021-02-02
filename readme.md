@@ -15,18 +15,22 @@ git submodule add https://github.com/tomashubelbauer/paper
 ```js
 import { Component, h1, div, ... } from './paper/index.js';
 
-// This web component will be defined with tag `paper-hello-world`
 export default class HelloWorld extends Component {
+  // This constructor must be present for Paper to be able to define the WC
+  // This web component will be defined with tag `paper-hello-world`
   constructor() {
     super(HelloWorld);
   }
 
+  // This method will comprise the component's closed shadow DOM content
+  // A `HelloWorld.css` stylesheet will be imported (and effectively scoped)
+  // A wrapper `div` element surrounds the component with ID equal to its name
   async *render() {
     yield h1('Hello, world!');
     const loaderDiv = div('Loading data…');
     yield loaderDiv;
 
-    const data = await fetch('./api/data').then(response => response.json());
+    const data = await fetch('/api/data').then(response => response.json());
     loaderDiv.remove();
     for (const item of data.items) {
       yield div('Item: ', JSON.stringify(item));
@@ -43,7 +47,8 @@ export default class HelloWorld extends Component {
 
 `HelloWorld.css`
 
-This file must exist, even if empty. Paper will import it.
+This file must exist, even if empty. Paper will import it to the closed shadow
+DOM.
 
 `index.js`
 ```js
