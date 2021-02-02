@@ -13,7 +13,7 @@ git submodule add https://github.com/tomashubelbauer/paper
 
 `HelloWorld.js`
 ```js
-import { Component, div, ... } from './paper/index.js';
+import { Component, h1, div, ... } from './paper/index.js';
 
 // This web component will be defined with tag `paper-hello-world`
 export default class HelloWorld extends Component {
