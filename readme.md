@@ -1,26 +1,12 @@
 # Paper
 
-This is a toy UI framework I've built while working on a personal web app which
-uses vanilla JS, web components and ESM with no dependencies.
-
-Initially I was using the DOM API directly and it worked just as well, but I had
-this idea to use asynchronous iterators for a UI framework so I figured I'd try
-that in here.
-
-I want to start pulling out the non-core concerns of the app, but still want to
-keep it dependency-free, so I'll pull this out and use it as a Git submodule.
-
-Think what you will of this, it's a personal project and it works for me which
-somehow makes the prior sentence to this one make sense.
-
-As far as fitness of this project for production use goes, I highly recommend
-you use it and use it in production, I'm sure it will score you a promotion at
-work so why wait?
+Paper is a JavaScript UI library which is usable as an ESM module and has no
+dependencies.
 
 ## Installation
 
 ```
-git submodule add https://github.com/TomasHubelbauer/paper
+git submodule add https://github.com/tomashubelbauer/paper
 ```
 
 ## Usage
@@ -35,13 +21,22 @@ export default class HelloWorld extends Component {
     super(HelloWorld);
   }
 
-  *render() {
-    yield 'Hello, world!';
-    yield div('How are you, world?');
+  async *render() {
+    yield h1('Hello, world!');
+    const loaderDiv = div('Loading data…');
+    yield loaderDiv;
+    
+    const data = await fetch('./api/data').then(response => response.json());
+    loaderDiv.remove();
+    for (const item of data.items) {
+      yield div('Item: ', JSON.stringify(item));
+    }
+
+    if (data.more === 0) {
+      return '(no more items)';
+    }
+
+    yield `There are ${data.more} more items!`;
   }
 }
 ```
-
-## To-Do
-
-### Add tests
