@@ -17,6 +17,8 @@ void async function () {
     _function,
     generatorFunctionUndefinedReturn,
     generatorFunctionDefinedReturn,
+    generatorUndefinedReturn,
+    generatorDefinedReturn,
   ];
 
   for (const test of tests) {
@@ -29,6 +31,8 @@ void async function () {
     asyncFunction,
     asyncGeneratorFunctionUndefinedReturn,
     asyncGeneratorFunctionDefinedReturn,
+    asyncGeneratorUndefinedReturn,
+    asyncGeneratorDefinedReturn,
   ];
 
   for (const test of testsAsync) {
@@ -133,7 +137,6 @@ function trueFunction() {
   }
 }
 
-
 function falseFunction() {
   function _false() {
     return false;
@@ -179,6 +182,29 @@ function generatorFunctionDefinedReturn() {
   }
 }
 
+function generatorUndefinedReturn() {
+  function* generatorUndefinedReturn(arg) {
+    yield arg;
+  }
+
+  const element = div(generatorUndefinedReturn('TEST'));
+  if (element.innerHTML !== 'TEST') {
+    throw new Error(element.innerHTML);
+  }
+}
+
+function generatorDefinedReturn() {
+  function* generatorFunctionDefinedReturn(arg) {
+    yield arg;
+    return arg;
+  }
+
+  const element = div(generatorFunctionDefinedReturn('TEST'));
+  if (element.innerHTML !== 'TESTTEST') {
+    throw new Error(element.innerHTML);
+  }
+}
+
 async function asyncFunction() {
   async function asyncFunction() {
     await new Promise(resolve => setTimeout(resolve, 10));
@@ -211,6 +237,31 @@ async function asyncGeneratorFunctionDefinedReturn() {
   }
 
   const element = await divAsync(asyncGeneratorFunctionDefinedReturn);
+  if (element.innerHTML !== 'TESTTEST') {
+    throw new Error(element.innerHTML);
+  }
+}
+
+async function asyncGeneratorUndefinedReturn() {
+  async function* asyncGeneratorUndefinedReturn(arg) {
+    await new Promise(resolve => setTimeout(resolve, 10));
+    yield arg;
+  }
+
+  const element = await divAsync(asyncGeneratorUndefinedReturn('TEST'));
+  if (element.innerHTML !== 'TEST') {
+    throw new Error(element.innerHTML);
+  }
+}
+
+async function asyncGeneratorDefinedReturn() {
+  async function* asyncGeneratorDefinedReturn(arg) {
+    await new Promise(resolve => setTimeout(resolve, 10));
+    yield arg;
+    return arg;
+  }
+
+  const element = await divAsync(asyncGeneratorDefinedReturn('TEST'));
   if (element.innerHTML !== 'TESTTEST') {
     throw new Error(element.innerHTML);
   }

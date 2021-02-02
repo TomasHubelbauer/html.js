@@ -1,4 +1,5 @@
 import { link, div } from './index.js';
+import parent from './parentAsync.js';
 import './Component.test.js';
 
 /**
@@ -112,80 +113,10 @@ export default class Component extends HTMLElement {
     throw new Error(`The stylesheet for ${this.constructor.name} failed to load!`);
   }
 
-  /**
-   * Drain a generator such that even a value returned by `return` is captured.
-   * 
-   * @example
-   * 
-   * async function *test() {
-   *   yield 1;
-   *   yield 2;
-   *   return 3;
-   * }
-   * 
-   * // This does not work, prints 1, 2:
-   * for await (const number of test()) {
-   *   console.log(number);
-   * }
-   * 
-   * // This works, prints 1, 2, 3:
-   * for await (const number of drain(test())) {
-   *   console.log(number);
-   * }
-   */
-  async *drain(generator) {
-    let item;
-    do {
-      item = await generator.next();
-
-      // Yield a `yield`-produced value always
-      if (!item.done) {
-        yield item.value;
-      }
-
-      // Yield a `return`-produced value only if there is no, not for `return;`
-      else if (item.value !== undefined) {
-        yield item.value;
-      }
-    } while (!item.done);
-  }
-
   async mount() {
-    if (!this.render) {
-      return;
-    }
-
-    if (typeof this.render !== 'function') {
-      throw new Error(`'${this.constructor.name}.render' must be a function.`);
-    }
-
-    this._div.classList.toggle('rendering', true);
     this._div.innerHTML = '';
-
-    switch (this.render.constructor.name) {
-      case 'Function':
-      case 'AsyncFunction': {
-        this._div.append(await this.render());
-        break;
-      }
-      case 'GeneratorFunction':
-      case 'AsyncGeneratorFunction': {
-        for await (const node of this.drain(this.render())) {
-          if (node === undefined) {
-            this._div.innerHTML = '';
-          }
-          else {
-            this._div.append(node);
-          }
-        }
-
-        break;
-      }
-      default: {
-        throw new Error(`${this.constructor.name} render function is neither generator nor async: ${this.render.constructor.name}.`);
-      }
-    }
-
+    this._div.classList.toggle('rendering', true);
+    await parent(this._div, this.render);
     this._div.classList.toggle('rendering', false);
   }
 
