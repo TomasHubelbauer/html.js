@@ -113,11 +113,15 @@ export default class Component extends HTMLElement {
     throw new Error(`The stylesheet for ${this.constructor.name} failed to load!`);
   }
 
-  async mount() {
+  async mount(...args) {
     this._div.innerHTML = '';
-    this._div.classList.toggle('rendering', true);
-    await parent(this._div, this.render);
-    this._div.classList.toggle('rendering', false);
+
+    // Propagate any arguments to `mount` to `render` (none on initial mount)
+    if (this.render) {
+      this._div.classList.toggle('rendering', true);
+      await parent(this._div, await this.render(...args));
+      this._div.classList.toggle('rendering', false);
+    }
   }
 
   raise(name, detail = null) {
