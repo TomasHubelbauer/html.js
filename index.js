@@ -177,6 +177,10 @@ export function ul(/** @type {Attributes} */ attributes, /** @type {Children} */
   return html('ul', attributes, ...children);
 }
 
+export async function ulAsync(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+  return await htmlAsync('ul', attributes, ...children);
+}
+
 export function video(/** @type {Attributes} */ attributes) {
   return html('video', attributes);
 }
