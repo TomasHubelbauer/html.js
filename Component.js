@@ -101,12 +101,7 @@ export default class Component extends HTMLElement {
   }
 
   async handleLinkLoad() {
-    try {
-      await this.mount();
-    }
-    catch (error) {
-      throw new Error(`${this.constructor.name} failed to mount. ${error}`);
-    }
+    await this.mount();
   }
 
   handleLinkError() {
