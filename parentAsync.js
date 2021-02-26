@@ -3,7 +3,11 @@ import drain from './drainAsync.js';
 
 /** @typedef {string | number | boolean | function | HTMLElement} Child */
 
-export default async function parentAsync(/** @type {HTMLElement} */ element, /** @type {Child | Child[]} */ child) {
+export default async function parentAsync(/** @type {HTMLElement} */ element, /** @type {Child | Child[]} */ child, reset = false) {
+  if (reset) {
+    element.innerHTML = '';
+  }
+
   const _child = _parent(element, child);
   if (_child === undefined) {
     return;
