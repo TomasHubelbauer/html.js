@@ -15,6 +15,7 @@ git submodule add https://github.com/tomashubelbauer/paper
 ```js
 import { Component, h1, div, ... } from './paper/index.js';
 
+// Note that the component class must inherit from Component directly
 export default class HelloWorld extends Component {
   // This constructor must be present for Paper to be able to define the WC
   // This web component will be defined with tag `paper-hello-world`
@@ -54,3 +55,16 @@ DOM.
 ```js
 document.body.append(new HelloWorld());
 ```
+
+## Purpose
+
+I built Paper accidentally, by finding various tricks and hacks to make the UI
+code in my personal pure-JS, no-dependencies project a little less tedious to
+write. At some point it started making sense to pull it out and use it as a Git
+submodule and import it as an ESM module.
+
+## Limitations
+
+The component class must inherit from `Component` directly. This is because of
+some trickery used to determine if the class name matches the file name. If you
+do not want this feature, fork Paper and remove this restriction.
