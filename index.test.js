@@ -26,7 +26,6 @@ void async function () {
     //console.log(test.name);
   }
 
-  /** @type {() => Promise<void>} */
   const testsAsync = [
     asyncFunction,
     asyncGeneratorFunctionUndefinedReturn,
@@ -183,7 +182,7 @@ function generatorFunctionDefinedReturn() {
 }
 
 function generatorUndefinedReturn() {
-  function* generatorUndefinedReturn(arg) {
+  function* generatorUndefinedReturn(/** @type {unknown} */ arg) {
     yield arg;
   }
 
@@ -194,7 +193,7 @@ function generatorUndefinedReturn() {
 }
 
 function generatorDefinedReturn() {
-  function* generatorFunctionDefinedReturn(arg) {
+  function* generatorFunctionDefinedReturn(/** @type {unknown} */ arg) {
     yield arg;
     return arg;
   }
@@ -243,7 +242,7 @@ async function asyncGeneratorFunctionDefinedReturn() {
 }
 
 async function asyncGeneratorUndefinedReturn() {
-  async function* asyncGeneratorUndefinedReturn(arg) {
+  async function* asyncGeneratorUndefinedReturn(/** @type {unknown} */ arg) {
     await new Promise(resolve => setTimeout(resolve, 10));
     yield arg;
   }
@@ -255,7 +254,7 @@ async function asyncGeneratorUndefinedReturn() {
 }
 
 async function asyncGeneratorDefinedReturn() {
-  async function* asyncGeneratorDefinedReturn(arg) {
+  async function* asyncGeneratorDefinedReturn(/** @type {unknown} */ arg) {
     await new Promise(resolve => setTimeout(resolve, 10));
     yield arg;
     return arg;

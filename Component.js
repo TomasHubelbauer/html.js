@@ -1,6 +1,6 @@
-import { link, div } from './index.js';
-import parent from './parentAsync.js';
 import './Component.test.js';
+import { div, link } from './index.js';
+import parent from './parentAsync.js';
 
 /**
  * Provides a base class for all custom HTML elements (web components) which
@@ -19,7 +19,7 @@ import './Component.test.js';
  * }
  */
 export default class Component extends HTMLElement {
-  constructor(/** @type {Component} */ constructor) {
+  constructor(/** @type {new () => Component} */ constructor) {
     if (!constructor) {
       throw new Error('Constructor not defined! Pass the derived class name, e.g.: `super(MyComponent)` instead of `super()`!');
     }
@@ -43,19 +43,23 @@ export default class Component extends HTMLElement {
 
     // Bind class methods automatically for convenience
     const proto = Reflect.getPrototypeOf(this);
-    const keys = Reflect.ownKeys(proto);
-    for (const key of keys) {
-      const value = this[key];
+    if (proto !== null) {
+      const keys = Reflect.ownKeys(proto);
+      for (const key of keys) {
+        /** @ts-ignore */
+        const value = this[key];
 
-      if (typeof value !== 'function') {
-        continue;
+        if (typeof value !== 'function') {
+          continue;
+        }
+
+        if (value === this.constructor) {
+          continue;
+        }
+
+        /** @ts-ignore */
+        this[key] = value.bind(this);
       }
-
-      if (value === this.constructor) {
-        continue;
-      }
-
-      this[key] = value.bind(this);
     }
 
     // Attach shadow in the closed mode to isolate the component's styles
@@ -108,18 +112,21 @@ export default class Component extends HTMLElement {
     throw new Error(`The stylesheet for ${this.constructor.name} failed to load!`);
   }
 
-  async mount(...args) {
+  async mount(/** @type {unknown[]} */ ...args) {
     this._div.innerHTML = '';
 
     // Propagate any arguments to `mount` to `render` (none on initial mount)
+    /** @ts-ignore */
     if (this.render) {
       this._div.classList.toggle('rendering', true);
+
+      /** @ts-ignore */
       await parent(this._div, await this.render(...args));
       this._div.classList.toggle('rendering', false);
     }
   }
 
-  raise(name, detail = null) {
+  raise(/** @type {string | Event} */ name, /** @type {unknown} */ detail = null) {
     // Bubble the event
     if (name instanceof Event) {
       this.dispatchEvent(new CustomEvent(name.type, name));

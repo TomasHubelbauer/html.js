@@ -1,8 +1,5 @@
 import attribute from './attribute.js';
 
-/** @typedef {{[attribute: string]: string | number | boolean}} Attributes */
-/** @typedef {string | number | boolean | function | HTMLElement} Child */
-
 export default function html(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Child[]} */ children) {
   const element = typeof tag === 'string' ? document.createElement(tag) : tag;
 
@@ -11,11 +8,14 @@ export default function html(/** @type {string | HTMLElement} */ tag, /** @type 
       children.unshift(attributes);
     }
     else if (typeof attributes === 'object') {
+      /** @ts-ignore */
       if (attributes[Symbol.toStringTag] === 'Generator' || attributes[Symbol.toStringTag] === 'AsyncGenerator') {
+        /** @ts-ignore */
         children.unshift(attributes);
       }
       else {
         for (const key in attributes) {
+          /** @ts-ignore */
           const value = attributes[key];
           attribute(element, key, value);
         }

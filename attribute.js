@@ -1,4 +1,4 @@
-export default function attribute(/** @type {HTMLElement} */ element, /* @type {string} */ key, /** @type {unknown} */ value) {
+export default function attribute(/** @type {HTMLElement} */ element, /** @type {string} */ key, /** @type {string | { [key: string]: string; }} */ value) {
   if (value === undefined) {
     return;
   }
@@ -10,7 +10,7 @@ export default function attribute(/** @type {HTMLElement} */ element, /* @type {
       }
 
       for (const key in value) {
-        element.style[key] = value[key];
+        element.style.setProperty(key, value[key]);
       }
 
       break;
@@ -23,7 +23,7 @@ export default function attribute(/** @type {HTMLElement} */ element, /* @type {
         }
         case 'object': {
           for (const key in value) {
-            element.classList.toggle(key, value[key]);
+            element.classList.toggle(key, !!value[key]);
           }
 
           break;
@@ -42,7 +42,7 @@ export default function attribute(/** @type {HTMLElement} */ element, /* @type {
 
       for (const key in value) {
         try {
-          element.dataset[key] = value[key];
+          element.dataset[key] = value[key].toString();
         }
         catch (error) {
           throw new Error(`Failed to set data attribute '${key}': '${value[key]}'.`);
@@ -68,6 +68,10 @@ export default function attribute(/** @type {HTMLElement} */ element, /* @type {
       break;
     }
     default: {
+      if (typeof value === 'object') {
+        throw new Error(`The ${key} attribute must not be an object!`);
+      }
+
       if (key.startsWith('on') && typeof value === 'function') {
         element.addEventListener(key.slice('on'.length), value);
       }

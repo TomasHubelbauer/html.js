@@ -23,6 +23,7 @@ export default function* drain(/** @type {function | object} */ generator) {
   let child;
 
   do {
+    /** @ts-ignore */
     child = generator.next();
 
     // Yield a `yield`-produced value always

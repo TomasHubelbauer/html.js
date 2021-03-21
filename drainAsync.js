@@ -23,6 +23,7 @@ export default async function* drainAsync(/** @type {function | object} */ gener
   let child;
 
   do {
+    /** @ts-ignore */
     child = await generator.next();
 
     // Yield a `yield`-produced value always

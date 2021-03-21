@@ -2,14 +2,11 @@
 
 export { default as Component } from './Component.js';
 import _html from './html.js';
-import parentSync from './parentSync.js';
-import parentAsync from './parentAsync.js';
 import './index.test.js';
+import parentAsync from './parentAsync.js';
+import parentSync from './parentSync.js';
 
-/** @typedef {{[attribute: string]: string | number | boolean}} Attributes */
-/** @typedef {string | number | boolean | function | HTMLElement} Child */
-
-export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   // Capture array such that changes made to it by `_html` are preserved
   const _children = [...children];
   const element = _html(tag, attributes, _children);
@@ -17,7 +14,7 @@ export function html(/** @type {string | HTMLElement} */ tag, /** @type {Attribu
   return element;
 }
 
-export async function htmlAsync(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+export async function htmlAsync(/** @type {string | HTMLElement} */ tag, /** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   // Capture array such that changes made to it by `_html` are preserved
   const _children = [...children];
   const element = _html(tag, attributes, _children);
@@ -25,162 +22,236 @@ export async function htmlAsync(/** @type {string | HTMLElement} */ tag, /** @ty
   return element;
 }
 
-export function a(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+export function a(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   return html('a', attributes, ...children);
 }
 
+/** @return {HTMLAudioElement} */
 export function audio(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('audio', attributes);
 }
 
-export function button(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLButtonElement} */
+export function button(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('button', attributes, ...children);
 }
 
+/** @returns {HTMLBRElement} */
 export function br(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('br', attributes);
 }
 
+/** @returns {HTMLCanvasElement} */
 export function canvas(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('canvas', attributes);
 }
 
-export function code(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+// Note that `HTMLElement` is the correct type for the `code` element
+export function code(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   return html('code', attributes, ...children);
 }
 
-export function datalist(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLDataListElement} */
+export function datalist(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('datalist', attributes, ...children);
 }
 
-export function details(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLDetailsElement} */
+export function details(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('details', attributes, ...children);
 }
 
-export function div(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLDivElement} */
+export function div(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('div', attributes, ...children);
 }
 
-export async function divAsync(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {Promise<HTMLDivElement>} */
+export async function divAsync(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return await htmlAsync('div', attributes, ...children);
 }
 
-export function fieldset(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLFieldSetElement} */
+export function fieldset(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('fieldset', attributes, ...children);
 }
 
-export function h1(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLHeadingElement} */
+export function h1(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('h1', attributes, ...children);
 }
 
-export function h2(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLHeadingElement} */
+export function h2(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('h2', attributes, ...children);
 }
 
-export function h3(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLHeadingElement} */
+export function h3(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('h3', attributes, ...children);
 }
 
-export function iframe(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLFieldSetElement} */
+export function iframe(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('iframe', attributes, ...children);
 }
 
+/** @returns {HTMLImageElement} */
 export function img(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('img', attributes);
 }
 
+/** @return {HTMLInputElement} */
 export function input(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('input', attributes);
 }
 
-export function label(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLLabelElement} */
+export function label(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('label', attributes, ...children);
 }
 
-export function legend(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLLegendElement} */
+export function legend(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('legend', attributes, ...children);
 }
 
-export function li(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLLIElement} */
+export function li(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('li', attributes, ...children);
 }
 
-export function link(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLLinkElement} */
+export function link(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('link', attributes, ...children);
 }
 
-export function option(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLOptionElement} */
+export function option(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('option', attributes, ...children);
 }
 
-export function p(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLParagraphElement} */
+export function p(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('p', attributes, ...children);
 }
 
-export function pre(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLPreElement} */
+export function pre(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('pre', attributes, ...children);
 }
 
+/** @returns {HTMLProgressElement} */
 export function progress(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('progress', attributes);
 }
 
+/** @returns {HTMLScriptElement} */
 export function script(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('script', attributes);
 }
 
-export function select(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLSelectElement} */
+export function select(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('select', attributes, ...children);
 }
 
-export function span(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLSpanElement} */
+export function span(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   return html('span', attributes, ...children);
 }
 
-export function strong(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+// Note that `HTMLElement` is the correct type for the `strong` element
+export function strong(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   return html('strong', attributes, ...children);
 }
 
-export function summary(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+// Note that `HTMLElement` is the correct type for the `summary` element
+export function summary(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
   return html('summary', attributes, ...children);
 }
 
-export function table(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableElement} */
+export function table(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('table', attributes, ...children);
 }
 
-export function tbody(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableSectionElement} */
+export function tbody(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('tbody', attributes, ...children);
 }
 
-export function td(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableDataCellElement} */
+export function td(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('td', attributes, ...children);
 }
 
+/** @returns {HTMLTextAreaElement} */
 export function textarea(/** @type {Attributes} */ attributes) {
+  /** @ts-ignore */
   return html('textarea', attributes);
 }
 
-export function th(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableHeaderCellElement} */
+export function th(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('th', attributes, ...children);
 }
 
-export function thead(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableSectionElement} */
+export function thead(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('thead', attributes, ...children);
 }
 
-export function tr(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLTableRowElement} */
+export function tr(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('tr', attributes, ...children);
 }
 
-export function ul(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {HTMLUListElement} */
+export function ul(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return html('ul', attributes, ...children);
 }
 
-export async function ulAsync(/** @type {Attributes} */ attributes, /** @type {Children} */ ...children) {
+/** @returns {Promise<HTMLUListElement>} */
+export async function ulAsync(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  /** @ts-ignore */
   return await htmlAsync('ul', attributes, ...children);
 }
 
+/** @returns {HTMLVideoElement} */
 export function video(/** @type {Attributes} */ attributes) {
-  return html('video', attributes);
+  /** @ts-ignore */
+  return /** @type {any} */ html('video', attributes);
 }

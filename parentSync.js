@@ -1,13 +1,12 @@
-import _parent from './parent.js';
 import drain from './drain.js';
-
-/** @typedef {string | number | boolean | function | HTMLElement} Child */
+import _parent from './parent.js';
 
 export default function parent(/** @type {HTMLElement} */ element, /** @type {Child | Child[]} */ child, reset = false) {
   if (reset) {
     element.innerHTML = '';
   }
 
+  /** @ts-ignore */
   const _child = _parent(element, child);
   if (_child === undefined) {
     return;
@@ -49,8 +48,10 @@ export default function parent(/** @type {HTMLElement} */ element, /** @type {Ch
   }
 
   if (typeof child === 'object') {
+    /** @ts-ignore */
     switch (child[Symbol.toStringTag]) {
       case 'Generator': {
+        /** @ts-ignore */
         for (const _child of drain(child)) {
           parent(element, _child);
         }

@@ -1,13 +1,12 @@
-import _parent from './parent.js';
 import drain from './drainAsync.js';
-
-/** @typedef {string | number | boolean | function | HTMLElement} Child */
+import _parent from './parent.js';
 
 export default async function parentAsync(/** @type {HTMLElement} */ element, /** @type {Child | Child[]} */ child, reset = false) {
   if (reset) {
     element.innerHTML = '';
   }
 
+  /** @ts-ignore */
   const _child = _parent(element, child);
   if (_child === undefined) {
     return;
@@ -45,9 +44,11 @@ export default async function parentAsync(/** @type {HTMLElement} */ element, /*
   }
 
   if (typeof child === 'object') {
+    /** @ts-ignore */
     switch (child[Symbol.toStringTag]) {
       case 'Generator':
       case 'AsyncGenerator': {
+        /** @ts-ignore */
         for await (const _child of drain(child)) {
           await parentAsync(element, _child);
         }

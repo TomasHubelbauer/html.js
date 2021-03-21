@@ -6,7 +6,7 @@ export default function parent(/** @type {HTMLElement} */ element, /** @type {Ch
   }
 
   if (typeof child === 'string' || typeof child === 'number' || typeof child === 'boolean' || child instanceof HTMLElement) {
-    element.append(child);
+    element.append(child.toString());
     return;
   }
 
