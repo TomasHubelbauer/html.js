@@ -5,7 +5,12 @@ export default function parent(/** @type {HTMLElement} */ element, /** @type {Ch
     return;
   }
 
-  if (typeof child === 'string' || typeof child === 'number' || typeof child === 'boolean' || child instanceof HTMLElement) {
+  if (child instanceof HTMLElement || typeof child === 'string') {
+    element.append(child);
+    return;
+  }
+
+  if (typeof child === 'number' || typeof child === 'boolean') {
     element.append(child.toString());
     return;
   }
