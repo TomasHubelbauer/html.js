@@ -26,232 +26,161 @@ export function a(/** @type {Attributes} */ attributes, /** @type {Child[]} */ .
   return html('a', attributes, ...children);
 }
 
-/** @return {HTMLAudioElement} */
 export function audio(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('audio', attributes);
+  return /** @type {HTMLAudioElement} */ (html('audio', attributes));
 }
 
-/** @returns {HTMLButtonElement} */
 export function button(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('button', attributes, ...children);
+  return /** @type {HTMLButtonElement} */ (html('button', attributes, ...children));
 }
 
-/** @returns {HTMLBRElement} */
 export function br(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('br', attributes);
+  return /** @type {HTMLBRElement} */ (html('br', attributes));
 }
 
-/** @returns {HTMLCanvasElement} */
 export function canvas(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('canvas', attributes);
+  return /** @type {HTMLCanvasElement} */ (html('canvas', attributes));
 }
 
-// Note that `HTMLElement` is the correct type for the `code` element
 export function code(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  // Note that `HTMLElement` is the correct type for the `code` element
   return html('code', attributes, ...children);
 }
 
-/** @returns {HTMLDataListElement} */
 export function datalist(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('datalist', attributes, ...children);
+  return /** @type {HTMLDataListElement} */ (html('datalist', attributes, ...children));
 }
 
-/** @returns {HTMLDetailsElement} */
 export function details(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('details', attributes, ...children);
+  return /** @type {HTMLDetailsElement} */ (html('details', attributes, ...children));
 }
 
-/** @returns {HTMLDivElement} */
 export function div(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('div', attributes, ...children);
+  return /** @type {HTMLDivElement} */ (html('div', attributes, ...children));
 }
 
-/** @returns {Promise<HTMLDivElement>} */
 export async function divAsync(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return await htmlAsync('div', attributes, ...children);
+  return /** @type {HTMLDivElement} */ (await htmlAsync('div', attributes, ...children));
 }
 
-/** @returns {HTMLFieldSetElement} */
 export function fieldset(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('fieldset', attributes, ...children);
+  return /** @type {HTMLFieldSetElement} */ (html('fieldset', attributes, ...children));
 }
 
-/** @returns {HTMLHeadingElement} */
 export function h1(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('h1', attributes, ...children);
+  return /** @type {HTMLHeadingElement} */ (html('h1', attributes, ...children));
 }
 
-/** @returns {HTMLHeadingElement} */
 export function h2(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('h2', attributes, ...children);
+  return /** @type {HTMLHeadingElement} */ (html('h2', attributes, ...children));
 }
 
-/** @returns {HTMLHeadingElement} */
 export function h3(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('h3', attributes, ...children);
+  return /** @type {HTMLHeadingElement} */ (html('h3', attributes, ...children));
 }
 
-/** @returns {HTMLFieldSetElement} */
 export function iframe(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('iframe', attributes, ...children);
+  return /** @type {HTMLIFrameElement} */ (html('iframe', attributes, ...children));
 }
 
-/** @returns {HTMLImageElement} */
 export function img(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('img', attributes);
+  return /** @type {HTMLImageElement} */ (html('img', attributes));
 }
 
-/** @return {HTMLInputElement} */
 export function input(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('input', attributes);
+  return /** @type {HTMLInputElement} */ (html('input', attributes));
 }
 
-/** @returns {HTMLLabelElement} */
 export function label(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('label', attributes, ...children);
+  return /** @type {HTMLLabelElement} */ (html('label', attributes, ...children));
 }
 
-/** @returns {HTMLLegendElement} */
 export function legend(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('legend', attributes, ...children);
+  return /** @type {HTMLLegendElement} */ (html('legend', attributes, ...children));
 }
 
-/** @returns {HTMLLIElement} */
 export function li(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('li', attributes, ...children);
+  return /** @type {HTMLLIElement} */ (html('li', attributes, ...children));
 }
 
-/** @returns {HTMLLinkElement} */
 export function link(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('link', attributes, ...children);
+  return /** @type {HTMLLinkElement} */ (html('link', attributes, ...children));
 }
 
-/** @returns {HTMLOptionElement} */
 export function option(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('option', attributes, ...children);
+  return /** @type {HTMLOptionElement} */ (html('option', attributes, ...children));
 }
 
-/** @returns {HTMLParagraphElement} */
 export function p(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('p', attributes, ...children);
+  return /** @type {HTMLParagraphElement} */ (html('p', attributes, ...children));
 }
 
-/** @returns {HTMLPreElement} */
 export function pre(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('pre', attributes, ...children);
+  return /** @type {HTMLPreElement} */ (html('pre', attributes, ...children));
 }
 
-/** @returns {HTMLProgressElement} */
 export function progress(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('progress', attributes);
+  return /** @type {HTMLProgressElement} */ (html('progress', attributes));
 }
 
-/** @returns {HTMLScriptElement} */
 export function script(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('script', attributes);
+  return /** @type {HTMLScriptElement} */ (html('script', attributes));
 }
 
-/** @returns {HTMLSelectElement} */
 export function select(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('select', attributes, ...children);
+  return /** @type {HTMLSelectElement} */ (html('select', attributes, ...children));
 }
 
-/** @returns {HTMLSpanElement} */
 export function span(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  return html('span', attributes, ...children);
+  return /** @type {HTMLSpanElement} */ (html('span', attributes, ...children));
 }
 
-// Note that `HTMLElement` is the correct type for the `strong` element
 export function strong(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  // Note that `HTMLElement` is the correct type for the `strong` element
   return html('strong', attributes, ...children);
 }
 
-// Note that `HTMLElement` is the correct type for the `summary` element
 export function summary(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
+  // Note that `HTMLElement` is the correct type for the `summary` element
   return html('summary', attributes, ...children);
 }
 
-/** @returns {HTMLTableElement} */
 export function table(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('table', attributes, ...children);
+  return /** @type {HTMLTableElement} */ (html('table', attributes, ...children));
 }
 
-/** @returns {HTMLTableSectionElement} */
 export function tbody(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('tbody', attributes, ...children);
+  return /** @type {HTMLTableSectionElement} */ (html('tbody', attributes, ...children));
 }
 
-/** @returns {HTMLTableDataCellElement} */
 export function td(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('td', attributes, ...children);
+  return /** @type {HTMLTableDataCellElement} */ (html('td', attributes, ...children));
 }
 
-/** @returns {HTMLTextAreaElement} */
 export function textarea(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return html('textarea', attributes);
+  return /** @type {HTMLTextAreaElement} */ (html('textarea', attributes));
 }
 
-/** @returns {HTMLTableHeaderCellElement} */
 export function th(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('th', attributes, ...children);
+  return /** @type {HTMLTableHeaderCellElement} */ (html('th', attributes, ...children));
 }
 
-/** @returns {HTMLTableSectionElement} */
 export function thead(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('thead', attributes, ...children);
+  return /** @type {HTMLTableSectionElement} */ (html('thead', attributes, ...children));
 }
 
-/** @returns {HTMLTableRowElement} */
 export function tr(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('tr', attributes, ...children);
+  return /** @type {HTMLTableRowElement} */ (html('tr', attributes, ...children));
 }
 
-/** @returns {HTMLUListElement} */
 export function ul(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return html('ul', attributes, ...children);
+  return /** @type {HTMLUListElement} */ (html('ul', attributes, ...children));
 }
 
-/** @returns {Promise<HTMLUListElement>} */
 export async function ulAsync(/** @type {Attributes} */ attributes, /** @type {Child[]} */ ...children) {
-  /** @ts-ignore */
-  return await htmlAsync('ul', attributes, ...children);
+  return /** @type {HTMLUListElement} */ (await htmlAsync('ul', attributes, ...children));
 }
 
-/** @returns {HTMLVideoElement} */
 export function video(/** @type {Attributes} */ attributes) {
-  /** @ts-ignore */
-  return /** @type {any} */ html('video', attributes);
+  return /** @type {HTMLVideoElement} */ (html('video', attributes));
 }
