@@ -1,4 +1,4 @@
-export default function attribute(/** @type {HTMLElement} */ element, /** @type {string} */ key, /** @type {string | { [key: string]: string; }} */ value) {
+export default function attribute(/** @type {HTMLElement} */ element, /** @type {string} */ key, /** @type {string | Record<string, string>} */ value) {
   if (value === undefined) {
     return;
   }
