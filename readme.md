@@ -68,3 +68,13 @@ submodule and import it as an ESM module.
 The component class must inherit from `Component` directly. This is because of
 some trickery used to determine if the class name matches the file name. If you
 do not want this feature, fork Paper and remove this restriction.
+
+## To-Do
+
+### Split off `Component.js` into a new `paper-wc` repository
+
+Paper should be usable without it and essentially implement the ideas I have
+been contemplating in my `acter` and `fragment` repositories. By pulling this
+web component helper class out, I'll be able to add non-web-components based
+demos and delete the `acter` and `fragment` repositories making Paper my final
+word on a build-system-less UI framework.
