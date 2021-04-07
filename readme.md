@@ -5,7 +5,15 @@ dependencies.
 
 ## Installation
 
+### `script` Tag
+
+```html
+<script src="https://tomashubelbauer.github.io/paper/index.js" type="module"></script>
 ```
+
+### Git Submodule
+
+```bash
 git submodule add https://github.com/tomashubelbauer/paper
 ```
 
